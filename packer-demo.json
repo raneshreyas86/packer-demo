@@ -6,22 +6,16 @@
   "builders": [{
     "type": "amazon-ebs",
     "access_key": "{{user `aws_access_key`}}",
-    "secret_key": "{{user `aws_secret_key`}}",
-    "region": "eu-west-1",
-    "source_ami": "ami-844e0bf7",
+    "secret_key": "{{user `aws_secrey_key`}}",
+    "region": "us-east-1",
+    "source_ami": "ami-000b3a073fc20e415",
     "instance_type": "t2.micro",
     "ssh_username": "ubuntu",
-    "ami_name": "packer-nodejs-demo {{timestamp}}"
+    "ami_name": "packer-example {{timestamp}}"
   }],
-  "provisioners": [
-  {
-    "type": "file",
-    "source": "app",
-    "destination": "/tmp/app"
-  },
-  {
+  "provisioners": [{
     "type": "shell",
-    "scripts": [  "scripts/deploy.sh"   ],
+    "scripts": [  "scripts/install_software.sh"   ],
     "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
     "pause_before": "10s"
   }]
