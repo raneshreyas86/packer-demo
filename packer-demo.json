@@ -8,9 +8,9 @@
     "access_key": "{{user `aws_access_key`}}",
     "secret_key": "{{user `aws_secrey_key`}}",
     "region": "us-east-1",
-    "source_ami": "ami-000b3a073fc20e415",
+    "source_ami": "ami-00eb20669e0990cb4",
     "instance_type": "t2.micro",
-    "ssh_username": "ubuntu",
+    "ssh_username": "ec2-user",
     "ami_name": "packer-example {{timestamp}}"
   }],
   "provisioners": [{
