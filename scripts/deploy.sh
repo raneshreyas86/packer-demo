@@ -1,14 +1,15 @@
 #!/bin/bash
-apt-get update
-apt-get install -y nginx nodejs npm
+yum update
+yum install -y nginx
+yum install nodejs npm --enablerepo=epel
 
 groupadd node-demo
 useradd -d /app -s /bin/false -g node-demo node-demo
 
-mv /tmp/app /app
+mv /app /app
 chown -R node-demo:node-demo /app
 
-echo 'user www-data;
+echo 'user root;
 worker_processes auto;
 pid /run/nginx.pid;
 
@@ -28,23 +29,7 @@ http {
   }
 }' > /etc/nginx/nginx.conf
 
-service nginx restart
+service nginx start
 
-cd /app
+cd /app/app
 npm install
-
-echo '[Service]
-ExecStart=/usr/bin/nodejs /app/index.js
-Restart=always
-StandardOutput=syslog
-StandardError=syslog
-SyslogIdentifier=node-demo
-User=node-demo
-Group=node-demo
-Environment=NODE_ENV=production
-
-[Install]
-WantedBy=multi-user.target' > /etc/systemd/system/node-demo.service
-
-systemctl enable node-demo
-systemctl start node-demo
