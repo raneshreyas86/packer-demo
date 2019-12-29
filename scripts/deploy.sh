@@ -1,13 +1,13 @@
 #!/bin/bash
-yum update
-yum install -y nginx
-yum install nodejs npm --enablerepo=epel
+sudo yum update
+sudo yum install -y nginx
+sudo yum install nodejs npm --enablerepo=epel
 
-groupadd node-demo
-useradd -d /app -s /bin/false -g node-demo node-demo
+sudo groupadd node-demo
+sudo useradd -d /app -s /bin/false -g node-demo node-demo
 
 mv /app /app
-chown -R node-demo:node-demo /app
+sudo chown -R node-demo:node-demo /app
 
 echo 'user root;
 worker_processes auto;
@@ -29,7 +29,7 @@ http {
   }
 }' > /etc/nginx/nginx.conf
 
-service nginx start
+sudo service nginx start
 
 cd /app/app
-npm install
+sudo npm install
