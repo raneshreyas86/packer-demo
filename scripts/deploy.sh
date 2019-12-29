@@ -31,5 +31,3 @@ http {
 
 sudo service nginx start
 
-cd /app/app
-sudo npm install
